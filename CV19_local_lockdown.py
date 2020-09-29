@@ -21,7 +21,6 @@ def buildResponse(a_name):
     "dailyCases": "newCasesByPublishDate",
     "newDeaths": "newDeaths28DaysByPublishDate",
     "cumDeaths28DaysByPublishDate":"cumDeaths28DaysByPublishDate",
-
     }
 
     api_params = {
