@@ -3,9 +3,21 @@ from requests import get
 from json import dumps
 
 ENDPOINT = "https://api.coronavirus.data.gov.uk/v1/data"
+HEADER=["//// Covid-19 New Daily Cases  /////"]
 AREA_TYPE = "ltla"
-AREA_NAME = ["North Lincolnshire","Doncaster","East Hertfordshire","North Hertfordshire","Harlow","Broxbourne","Welwyn Hatfield", "Milton Keynes"]
-messageAlert = ["--error","--Green... All OK","--Amber Alert... Now make a list of essentials...","--Amber Alert... Go and buy essentials...","--Red Alert... Now PANIC..." ]
+AREA_NAME = ["North Lincolnshire",
+             "Doncaster",
+             "East Hertfordshire",
+             "North Hertfordshire",
+             "Harlow","Broxbourne",
+             "Welwyn Hatfield",
+             "Milton Keynes"]
+
+messageAlert = ["--error",
+                "--Green... All OK",
+                "--Amber Alert... Now make a list of essentials...",
+                "--Amber Alert... Go and buy essentials...",
+                "--Red Alert... Now PANIC..." ]
 
 # Build response string
 def buildResponse(a_name):
@@ -34,7 +46,7 @@ def buildResponse(a_name):
 
 # Output Header
 def printHeader():
-    print("//// Covid-19 New Daily Cases  /////")
+    print(HEADER)
 
 # Output messages
 def messageUpdate(num):
