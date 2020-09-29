@@ -19,9 +19,8 @@ messageAlert = ["--error",
                 "--Amber... Go and buy essentials...",
                 "--Red... Now PANIC..." ]
 
-# Build response string
+# Build response string.
 def buildResponse(a_name):
-
     filters = [
     f"areaType={AREA_TYPE}",
     f"areaName={a_name}"
@@ -44,11 +43,11 @@ def buildResponse(a_name):
 
     return get(ENDPOINT, params=api_params, timeout=10)
 
-# Output Header
+# Output Header.
 def printHeader():
     print(HEADER)
 
-# Output messages
+# Output messages.
 def messageUpdate(num):
     if not num:
         message = messageAlert[0]
@@ -66,7 +65,7 @@ def messageUpdate(num):
             message = messageAlert[0]
     return message
 
-# Find the number of cases in each location
+# Find the number of cases in each location.
 def getNumOfCases(response):
     numOfCases = re.findall(r'\b\d+\b',response.content.decode()[30:])
     if numOfCases == True:
@@ -74,9 +73,8 @@ def getNumOfCases(response):
         #message = messageUpdate(num)
     return numOfCases
 
-# Main program 
+# Main program. 
 def main():
-
     printHeader()
     for a_name in AREA_NAME:
         response = buildResponse(a_name)
@@ -84,7 +82,6 @@ def main():
             assert response.status_code == 200
         except AssertionError as error:
             f"Failed request: {response.text}"
-
         numOfCases = getNumOfCases(response)
         message = messageUpdate(numOfCases)
         print(message, response.content.decode()[60:])
