@@ -15,7 +15,7 @@ AREA_NAME = ["North Lincolnshire",
 
 messageAlert = ["--error",
                 "--Green... All OK",
-                "--Amber Alert... Now make a list of essentials...",
+                "--Amber Alert... Time to make a list of essentials...",
                 "--Amber Alert... Go and buy essentials...",
                 "--Red Alert... Now PANIC..." ]
 
