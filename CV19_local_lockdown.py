@@ -15,9 +15,9 @@ AREA_NAME = ["North Lincolnshire",
 
 messageAlert = ["--error",
                 "--Green... All OK",
-                "--Amber Alert... Time to make a list of essentials...",
-                "--Amber Alert... Go and buy essentials...",
-                "--Red Alert... Now PANIC..." ]
+                "--Amber... Time to make a list of essentials...",
+                "--Amber... Go and buy essentials...",
+                "--Red... Now PANIC..." ]
 
 # Build response string
 def buildResponse(a_name):
@@ -60,7 +60,7 @@ def messageUpdate(num):
             message = messageAlert[2]
         elif num >15 and num <=20:
             message = messageAlert[3]
-        elif num >19:
+        elif num >20:
             message = messageAlert[4]
         else:
             message = messageAlert[0]
