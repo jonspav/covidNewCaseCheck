@@ -13,11 +13,12 @@ AREA_NAME = ["North Lincolnshire",
              "Welwyn Hatfield",
              "Milton Keynes"]
 
-messageAlert = ["--error",
-                "--Green... All OK",
-                "--Amber... Time to make a list of essentials...",
-                "--Amber... Go and buy essentials...",
-                "--Red... Now PANIC..." ]
+# Format is (low threshold, high threshold, message)
+# Message is seleced if low_threshold <= num < high_threshold
+messageAlert2 = [ (0, 10, "--Green... All OK"),
+                 (10, 15, "--Amber... Time to make a list of essentials..."),
+                 (15, 20, "--Amber... Go and buy essentials..."),
+                 (20, 99999, "--Red... Now PANIC...") ]
 
 # Build response string.
 def buildResponse(a_name):
@@ -40,7 +41,6 @@ def buildResponse(a_name):
     "structure": dumps(structure, separators=(",", ":")),
     "latestBy": "cumCasesByPublishDate"
     }
-
     return get(ENDPOINT, params=api_params, timeout=10)
 
 # Output Header.
@@ -48,22 +48,14 @@ def printHeader():
     print(HEADER)
 
 # Output messages.
-def messageUpdate(num):
-    if not num:
-        message = messageAlert[0]
-    else:
-        num = int(num[3])
-        if num >= 0 and num <=9:
-            message = messageAlert[1]
-        elif num >=10 and num <=15:
-            message = messageAlert[2]
-        elif num >15 and num <=20:
-            message = messageAlert[3]
-        elif num >20:
-            message = messageAlert[4]
-        else:
-            message = messageAlert[0]
-    return message
+def messageUpdate2(num):
+    try:
+        message = [m for m in messageAlert2 if m[0]<=num and num<[1]][0]
+    except TypeError:
+        message = f"messageUpdate was given '{num}' but expected a number"
+    except IndexError:
+        message = f"messageUpdate was given an invalid index of {num}"
+    return message 
 
 # Find the number of cases in each location.
 def getNumOfCases(response):
@@ -83,7 +75,8 @@ def main():
         except AssertionError as error:
             f"Failed request: {response.text}"
         numOfCases = getNumOfCases(response)
-        message = messageUpdate(numOfCases)
+        messageNum = int(numOfCases[3])
+        message = messageUpdate2(messageNum)
         print(message, response.content.decode()[60:])
 
 if __name__ == "__main__":
