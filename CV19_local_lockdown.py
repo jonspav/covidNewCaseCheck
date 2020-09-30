@@ -15,7 +15,7 @@ AREA_NAME = ["North Lincolnshire",
 
 # Format is (low threshold, high threshold, message)
 # Message is seleced if low_threshold <= num < high_threshold
-messageAlert2 = [ (0, 10, "--Green... All OK"),
+messageAlert = [ (0, 10, "--Green... All OK"),
                  (10, 15, "--Amber... Time to make a list of essentials..."),
                  (15, 20, "--Amber... Go and buy essentials..."),
                  (20, 99999, "--Red... Now PANIC...") ]
@@ -48,9 +48,9 @@ def printHeader():
     print(HEADER)
 
 # Output messages.
-def messageUpdate2(num):
+def messageUpdate(num):
     try:
-        message = [m for m in messageAlert2 if m[0]<=num and num<m[1]][0]
+        message = [m for m in messageAlert if m[0]<=num and num<m[1]][0]
     except TypeError:
         message = f"messageUpdate was given '{num}' but expected a number"
     except IndexError:
@@ -75,8 +75,7 @@ def main():
         except AssertionError as error:
             f"Failed request: {response.text}"
         numOfCases = getNumOfCases(response)
-        messageNum = int(numOfCases[3])
-        message = messageUpdate2(messageNum)
+        message = messageUpdate(int(numOfCases[3]))
         print(message, response.content.decode()[60:])
 
 if __name__ == "__main__":
