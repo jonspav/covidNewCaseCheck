@@ -50,7 +50,7 @@ def printHeader():
 # Output messages.
 def messageUpdate2(num):
     try:
-        message = [m for m in messageAlert2 if m[0]<=num and num<[1]][0]
+        message = [m for m in messageAlert2 if m[0]<=num and num<m[1]][0]
     except TypeError:
         message = f"messageUpdate was given '{num}' but expected a number"
     except IndexError:
