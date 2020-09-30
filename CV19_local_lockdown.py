@@ -74,9 +74,7 @@ def main():
             assert response.status_code == 200
         except AssertionError as error:
             f"Failed request: {response.text}"
-        numOfCases = getNumOfCases(response)
-        message = messageUpdate(int(numOfCases[3]))
-        print(message, response.content.decode()[60:])
+        print(messageUpdate(int(getNumOfCases(response)[3])), response.content.decode()[60:])
 
 if __name__ == "__main__":
     main()
