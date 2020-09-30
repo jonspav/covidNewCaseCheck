@@ -15,7 +15,7 @@ AREA_NAME = ["North Lincolnshire",
 
 # Format (low threshold, high threshold, message)
 # Message is seleced if low_threshold <= num < high_threshold
-messageAlert = [ (0, 10, "--Green... All OK"),
+messageOutAlert = [ (0, 10, "--Green... All OK"),
                  (10, 15, "--Amber... Time to make a list of essentials..."),
                  (15, 20, "--Amber... Go and buy essentials..."),
                  (20, 99999, "--Red... Now PANIC...") ]
@@ -50,7 +50,7 @@ def printHeader():
 # Output messages.
 def messageUpdate(num):
     try:
-        message = [m for m in messageAlert if m[0]<=num and num<m[1]][0]
+        message = [m for m in messageOutAlert if m[0]<=num and num<m[1]][0]
     except TypeError:
         message = f"messageUpdate was given '{num}' but expected a number"
     except IndexError:
