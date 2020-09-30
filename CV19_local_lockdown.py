@@ -13,7 +13,7 @@ AREA_NAME = ["North Lincolnshire",
              "Welwyn Hatfield",
              "Milton Keynes"]
 
-# Format is (low threshold, high threshold, message)
+# Format (low threshold, high threshold, message)
 # Message is seleced if low_threshold <= num < high_threshold
 messageAlert = [ (0, 10, "--Green... All OK"),
                  (10, 15, "--Amber... Time to make a list of essentials..."),
