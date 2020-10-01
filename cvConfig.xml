@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<data>
+  <items>
+    <item name="ENDPOINT">https://api.coronavirus.data.gov.uk/v1/data</item>
+    <item name="caseNumposition">3</item>
+    <item name="dataNumPosition">60</item>
+    <item name="HEADER">"//// Covid-19 New Daily Cases  /////"</item>
+    <item name="AREA_TYPE">ltla</item>
+  </items>
+  <area name = "AREA_NAME">
+    <localArea>North Lincolnshire</localArea>
+    <localArea>Doncaster</localArea>
+    <localArea>East Hertfordshire</localArea>
+    <localArea>North Hertfordshire</localArea>
+    <localArea>Harlow</localArea>
+    <localArea>Broxbourne</localArea>
+    <localArea>Welwyn Hatfield</localArea>
+    <localArea>Milton Keynes</localArea>
+  </area>
+</data>
+
