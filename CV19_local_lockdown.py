@@ -4,6 +4,7 @@ from requests import get
 from json import dumps
 import xml.etree.ElementTree as ET
 
+# Config file name.
 configFileName = "cvConfig.xml"
 
 # Load settings data from the cvConfig.xml 
@@ -26,7 +27,6 @@ def loadSettings(file_path):
     except:
             print("Could not file the file...")
         
-
 # Format (low threshold, high threshold, message)
 # Message is seleced if low_threshold <= num < high_threshold
 messageOutAlert = [ (0, 10, "--Green... All OK"),
