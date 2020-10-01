@@ -3,6 +3,8 @@ from requests import get
 from json import dumps
 
 ENDPOINT = "https://api.coronavirus.data.gov.uk/v1/data"
+caseNumposition = 3
+dataNumPosition = 60
 HEADER=["//// Covid-19 New Daily Cases  /////"]
 AREA_TYPE = "ltla"
 AREA_NAME = ["North Lincolnshire",
@@ -74,7 +76,7 @@ def main():
             assert response.status_code == 200
         except AssertionError as error:
             f"Failed request: {response.text}"
-        print(messageUpdate(int(getNumOfCases(response)[3])), response.content.decode()[60:])
+        print(messageUpdate(int(getNumOfCases(response)[caseNumposition])), response.content.decode()[dataNumPosition:])
 
 if __name__ == "__main__":
     main()
