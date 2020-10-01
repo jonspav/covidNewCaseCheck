@@ -8,21 +8,24 @@ configFileName = "cvConfig.xml"
 
 # Load settings data from the cvConfig.xml 
 def loadSettings(file_path):
-    cvConfigFiletree = ET.parse(file_path)
-    cvConfigFileroot = cvConfigFiletree.getroot()
-    ENDPOINT = cvConfigFileroot[0][0].text
-    caseNumposition = int(cvConfigFileroot[0][1].text)
-    dataNumPosition = int(cvConfigFileroot[0][2].text)
-    HEADER = [cvConfigFileroot[0][3].text]
-    AREA_TYPE = cvConfigFileroot[0][4].text
-    AREA_NAME = []
+    try:
+        cvConfigFiletree = ET.parse(file_path)
+        cvConfigFileroot = cvConfigFiletree.getroot()
+        ENDPOINT = cvConfigFileroot[0][0].text
+        caseNumposition = int(cvConfigFileroot[0][1].text)
+        dataNumPosition = int(cvConfigFileroot[0][2].text)
+        HEADER = [cvConfigFileroot[0][3].text]
+        AREA_TYPE = cvConfigFileroot[0][4].text
+        AREA_NAME = []
 
-    for area in cvConfigFileroot.iter('localArea'):
-        t = area.text
-        AREA_NAME.append(t)
-    return caseNumposition,dataNumPosition,HEADER,AREA_TYPE,AREA_NAME,ENDPOINT
-
-
+        for area in cvConfigFileroot.iter('localArea'):
+            t = area.text
+            AREA_NAME.append(t)
+        return caseNumposition,dataNumPosition,HEADER,AREA_TYPE,AREA_NAME,ENDPOINT
+    
+    except:
+            print("Could not file the file...")
+        
 
 # Format (low threshold, high threshold, message)
 # Message is seleced if low_threshold <= num < high_threshold
@@ -86,16 +89,17 @@ def getFilePath():
 
 # Main program. 
 def main():
-    file_path = getFilePath()
-    caseNumposition,dataNumPosition,HEADER,AREA_TYPE,AREA_NAME, ENDPOINT = loadSettings(file_path)
-    printHeader(HEADER)
-    for a_name in AREA_NAME:
-        response = buildResponse(a_name,AREA_TYPE,ENDPOINT)
-        try:
-            assert response.status_code == 200
-        except AssertionError as error:
-            f"Failed request: {response.text}"
-        print(messageUpdate(int(getNumOfCases(response)[caseNumposition])), response.content.decode()[dataNumPosition:])
+    try:
+        file_path = getFilePath()
+        caseNumposition,dataNumPosition,HEADER,AREA_TYPE,AREA_NAME, ENDPOINT = loadSettings(file_path)
+        printHeader(HEADER)
+        for a_name in AREA_NAME:
+            response = buildResponse(a_name,AREA_TYPE,ENDPOINT)
+            if response.status_code !=200:
+                print (f"Failed request: {response.text}")         
+            print(messageUpdate(int(getNumOfCases(response)[caseNumposition])), response.content.decode()[dataNumPosition:])
+    except:
+        print("Program was unable to run.")
     
 if __name__ == "__main__":
     main()
